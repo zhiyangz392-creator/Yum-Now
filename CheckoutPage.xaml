@@ -144,18 +144,13 @@
                 </VerticalStackLayout>
             </Border>
 
-            <Button Text="Confirm Amount"
-                    Clicked="OnConfirmAmountClicked"
+            <Button Text="Go to Payment"
+                    Clicked="OnGoToPaymentClicked"
                     HeightRequest="48"
                     CornerRadius="12"
                     BackgroundColor="#E6872F"
                     TextColor="White"
                     FontAttributes="Bold" />
-
-            <Label x:Name="ConfirmMessageLabel"
-                   IsVisible="False"
-                   FontSize="14"
-                   TextColor="#6A4A39" />
         </VerticalStackLayout>
     </ScrollView>
 

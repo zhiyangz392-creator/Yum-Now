@@ -12,6 +12,7 @@ internal static class LocalStorageService
     private const string LastSearchTagKey = "search.last_tag";
     private const string DeliveryAddressKey = "order.delivery_address";
     private const string CheckoutDraftKey = "checkout.last_draft";
+    private const string PreferredPaymentMethodKey = "payment.preferred_method";
     private const string RestaurantDraftPrefix = "restaurant.draft.";
 
     public static bool IsLoggedIn => Preferences.Default.Get(LoginStateKey, false);
@@ -103,6 +104,21 @@ internal static class LocalStorageService
     public static string GetDeliveryAddress()
     {
         return Preferences.Default.Get(DeliveryAddressKey, string.Empty);
+    }
+
+    public static void SavePreferredPaymentMethod(string method)
+    {
+        if (string.IsNullOrWhiteSpace(method))
+        {
+            return;
+        }
+
+        Preferences.Default.Set(PreferredPaymentMethodKey, method.Trim());
+    }
+
+    public static string GetPreferredPaymentMethod()
+    {
+        return Preferences.Default.Get(PreferredPaymentMethodKey, string.Empty);
     }
 
     public static void SaveMenuDraft(string restaurant, Dictionary<string, int> quantities)

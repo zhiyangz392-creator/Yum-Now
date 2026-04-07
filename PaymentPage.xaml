@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Yum_Now.PaymentPage"
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="#FFEFD5"
+             Title="Payment">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20,20" Spacing="14">
+            <Button Text="Back"
+                    Clicked="OnBackClicked"
+                    HorizontalOptions="Start"
+                    BackgroundColor="#FFF7EA"
+                    TextColor="#6B3E26"
+                    BorderColor="#BA9B80"
+                    BorderWidth="1"
+                    CornerRadius="10"
+                    Padding="12,6" />
+
+            <Label Text="Pay Bill"
+                   FontSize="28"
+                   FontAttributes="Bold"
+                   TextColor="#2E2E2E"
+                   HorizontalOptions="Center" />
+
+            <Border Stroke="#CFAF94"
+                    StrokeThickness="1"
+                    StrokeShape="RoundRectangle 12"
+                    BackgroundColor="#FFF8ED"
+                    Padding="12,10">
+                <VerticalStackLayout Spacing="6">
+                    <Grid ColumnDefinitions="Auto,*" ColumnSpacing="8">
+                        <Label Text="Restaurant:"
+                               FontSize="15"
+                               TextColor="#5D4A3F" />
+                        <Label x:Name="RestaurantLabel"
+                               Grid.Column="1"
+                               FontSize="15"
+                               FontAttributes="Bold"
+                               TextColor="#2E2E2E" />
+                    </Grid>
+
+                    <Grid ColumnDefinitions="Auto,*" ColumnSpacing="8">
+                        <Label Text="Amount:"
+                               FontSize="15"
+                               TextColor="#5D4A3F" />
+                        <Label x:Name="AmountLabel"
+                               Grid.Column="1"
+                               FontSize="16"
+                               FontAttributes="Bold"
+                               TextColor="#2E2E2E" />
+                    </Grid>
+
+                    <Label Text="Delivery Address"
+                           FontSize="14"
+                           TextColor="#5D4A3F" />
+                    <Label x:Name="AddressLabel"
+                           FontSize="14"
+                           TextColor="#2E2E2E"
+                           LineBreakMode="WordWrap" />
+                </VerticalStackLayout>
+            </Border>
+
+            <Label Text="Payment Method"
+                   FontSize="22"
+                   FontAttributes="Bold"
+                   TextColor="#2E2E2E" />
+
+            <Border Stroke="#CFAF94"
+                    StrokeThickness="1"
+                    StrokeShape="RoundRectangle 12"
+                    BackgroundColor="#FFF8ED"
+                    Padding="12,10">
+                <VerticalStackLayout Spacing="10">
+                    <RadioButton x:Name="GooglePayRadio"
+                                 GroupName="PaymentMethod"
+                                 Content="Google Pay"
+                                 TextColor="#2E2E2E" />
+
+                    <RadioButton x:Name="AlipayRadio"
+                                 GroupName="PaymentMethod"
+                                 Content="Alipay"
+                                 TextColor="#2E2E2E" />
+                </VerticalStackLayout>
+            </Border>
+
+            <Button Text="Pay Now"
+                    Clicked="OnPayNowClicked"
+                    HeightRequest="48"
+                    CornerRadius="12"
+                    BackgroundColor="#E6872F"
+                    TextColor="White"
+                    FontAttributes="Bold" />
+
+            <Label x:Name="StatusLabel"
+                   IsVisible="False"
+                   FontSize="14"
+                   TextColor="#6A4A39" />
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

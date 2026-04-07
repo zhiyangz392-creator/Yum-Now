@@ -61,7 +61,7 @@ public partial class CheckoutPage : ContentPage
         await Shell.Current.GoToAsync("//MainPage");
     }
 
-    private async void OnConfirmAmountClicked(object? sender, EventArgs e)
+    private async void OnGoToPaymentClicked(object? sender, EventArgs e)
     {
         var address = AddressEditor.Text?.Trim() ?? string.Empty;
 
@@ -77,16 +77,23 @@ public partial class CheckoutPage : ContentPage
             return;
         }
 
+        if (Shell.Current == null)
+        {
+            return;
+        }
+
         LocalStorageService.SaveDeliveryAddress(address);
         LocalStorageService.SaveCheckoutDraft(_restaurant, _items, _subtotal);
 
         var totalPay = _subtotal + DeliveryFee;
 
-        ConfirmMessageLabel.Text =
-            $"Amount confirmed.\nAddress: {address}\nTotal: SGD {totalPay:0.00}";
-        ConfirmMessageLabel.IsVisible = true;
+        var route =
+            $"{nameof(PaymentPage)}" +
+            $"?restaurant={Uri.EscapeDataString(_restaurant)}" +
+            $"&amount={Uri.EscapeDataString(totalPay.ToString("0.00", CultureInfo.InvariantCulture))}" +
+            $"&address={Uri.EscapeDataString(address)}";
 
-        await DisplayAlertAsync("Confirmed", $"Your bill is confirmed: SGD {totalPay:0.00}", "OK");
+        await Shell.Current.GoToAsync(route);
     }
 
     private void BindData()
@@ -116,8 +123,6 @@ public partial class CheckoutPage : ContentPage
         AddressEditor.Text = string.IsNullOrWhiteSpace(savedAddress)
             ? "Campus Gate A, Building 3, Unit 08-12"
             : savedAddress;
-
-        ConfirmMessageLabel.IsVisible = false;
     }
 
     private void TryFillFromStoredDraft()
