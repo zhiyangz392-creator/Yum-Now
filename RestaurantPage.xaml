@@ -1,0 +1,150 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Yum_Now.RestaurantPage"
+             Shell.NavBarIsVisible="False"
+             Title="Restaurant"
+             BackgroundColor="#FFEFD5">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20,20" Spacing="14">
+            <Button Text="Back"
+                    Clicked="OnBackClicked"
+                    HorizontalOptions="Start"
+                    BackgroundColor="#FFF7EA"
+                    TextColor="#6B3E26"
+                    BorderColor="#BA9B80"
+                    BorderWidth="1"
+                    CornerRadius="10"
+                    Padding="12,6" />
+
+            <Label Text="Restaurant Home"
+                   FontSize="28"
+                   FontAttributes="Bold"
+                   TextColor="#2E2E2E"
+                   HorizontalOptions="Center" />
+
+            <Border Stroke="#6A6A6A"
+                    StrokeThickness="1"
+                    StrokeShape="RoundRectangle 12"
+                    BackgroundColor="#FFF7EA"
+                    Padding="14">
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Restaurant Name"
+                           FontSize="14"
+                           TextColor="#6A6A6A" />
+                    <Label x:Name="RestaurantNameLabel"
+                           FontSize="22"
+                           FontAttributes="Bold"
+                           TextColor="#1F1F1F" />
+
+                    <Label Text="Category Tag"
+                           FontSize="14"
+                           TextColor="#6A6A6A"
+                           Margin="0,6,0,0" />
+                    <Label x:Name="TagLabel"
+                           FontSize="17"
+                           TextColor="#2F2F2F" />
+
+                    <Label x:Name="MenuSourceLabel"
+                           FontSize="13"
+                           TextColor="#8A5A3A"
+                           Margin="0,4,0,0" />
+                </VerticalStackLayout>
+            </Border>
+
+            <Label Text="Menu (SGD)"
+                   FontSize="24"
+                   FontAttributes="Bold"
+                   TextColor="#2E2E2E" />
+
+            <CollectionView x:Name="MenuCollection"
+                            SelectionMode="None">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Border Stroke="#6A6A6A"
+                                StrokeThickness="1"
+                                StrokeShape="RoundRectangle 10"
+                                BackgroundColor="#FFF7EA"
+                                Padding="12"
+                                Margin="0,4,0,4">
+                            <Grid ColumnDefinitions="*,Auto"
+                                  RowDefinitions="Auto,Auto"
+                                  ColumnSpacing="10"
+                                  RowSpacing="8">
+                                <Label Grid.Row="0"
+                                       Grid.Column="0"
+                                       Text="{Binding Name}"
+                                       FontSize="17"
+                                       FontAttributes="Bold"
+                                       TextColor="#1F1F1F" />
+
+                                <Label Grid.Row="1"
+                                       Grid.Column="0"
+                                       Text="{Binding PriceText}"
+                                       FontSize="15"
+                                       TextColor="#6A6A6A" />
+
+                                <HorizontalStackLayout Grid.Row="0"
+                                                       Grid.RowSpan="2"
+                                                       Grid.Column="1"
+                                                       Spacing="8"
+                                                       VerticalOptions="Center">
+                                    <Button Text="-"
+                                            Clicked="OnDecreaseClicked"
+                                            CommandParameter="{Binding .}"
+                                            WidthRequest="36"
+                                            HeightRequest="36"
+                                            CornerRadius="8"
+                                            BackgroundColor="#F2D4B7"
+                                            TextColor="#7A3D1B" />
+                                    <Label Text="{Binding Quantity}"
+                                           WidthRequest="28"
+                                           HorizontalTextAlignment="Center"
+                                           VerticalTextAlignment="Center"
+                                           FontSize="17"
+                                           TextColor="#2E2E2E" />
+                                    <Button Text="+"
+                                            Clicked="OnIncreaseClicked"
+                                            CommandParameter="{Binding .}"
+                                            WidthRequest="36"
+                                            HeightRequest="36"
+                                            CornerRadius="8"
+                                            BackgroundColor="#E6872F"
+                                            TextColor="White" />
+                                </HorizontalStackLayout>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <Border Stroke="#CBA98B"
+                    StrokeThickness="1"
+                    StrokeShape="RoundRectangle 12"
+                    BackgroundColor="#FFF8ED"
+                    Padding="12,10">
+                <VerticalStackLayout Spacing="4">
+                    <Label x:Name="TotalItemsLabel"
+                           Text="Total items: 0"
+                           FontSize="16"
+                           TextColor="#4A3B31" />
+                    <Label x:Name="EstimatedTotalLabel"
+                           Text="Estimated total: SGD 0.00"
+                           FontSize="16"
+                           FontAttributes="Bold"
+                           TextColor="#4A3B31" />
+                </VerticalStackLayout>
+            </Border>
+
+            <Button Text="Go to Bill Confirmation"
+                    Clicked="OnGoToCheckoutClicked"
+                    HeightRequest="48"
+                    CornerRadius="12"
+                    BackgroundColor="#E6872F"
+                    TextColor="White"
+                    FontAttributes="Bold" />
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

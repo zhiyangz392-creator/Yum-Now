@@ -1,0 +1,129 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:Yum_Now.Controls"
+             x:Class="Yum_Now.MainPage"
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="#FFEFD5">
+
+    <ScrollView BackgroundColor="#FFEFD5">
+        <VerticalStackLayout Padding="20,22,20,26" Spacing="16">
+            <Grid ColumnDefinitions="Auto,*,Auto">
+                <Button Grid.Column="0"
+                        Text="Back"
+                        Clicked="OnBackClicked"
+                        HorizontalOptions="Start"
+                        BackgroundColor="#FFF7EA"
+                        TextColor="#6B3E26"
+                        BorderColor="#BA9B80"
+                        BorderWidth="1"
+                        CornerRadius="10"
+                        Padding="12,6" />
+
+                <Button Grid.Column="2"
+                        Text="Logout"
+                        Clicked="OnLogoutClicked"
+                        HorizontalOptions="End"
+                        BackgroundColor="#FFF7EA"
+                        TextColor="#6B3E26"
+                        BorderColor="#BA9B80"
+                        BorderWidth="1"
+                        CornerRadius="10"
+                        Padding="12,6" />
+            </Grid>
+
+            <Border Stroke="#D1B59C"
+                    StrokeThickness="1"
+                    StrokeShape="RoundRectangle 16"
+                    BackgroundColor="#FFF8ED"
+                    Padding="14,12">
+                <VerticalStackLayout Spacing="4">
+                    <Label Text="Home"
+                           HorizontalOptions="Center"
+                           FontSize="34"
+                           FontAttributes="Bold"
+                           TextColor="#2E2E2E" />
+                    <Label Text="Choose a food type, then search."
+                           HorizontalOptions="Center"
+                           HorizontalTextAlignment="Center"
+                           FontSize="14"
+                           TextColor="#7A6050" />
+                </VerticalStackLayout>
+            </Border>
+
+            <Label Text="Cuisine Tags"
+                   FontSize="18"
+                   FontAttributes="Bold"
+                   TextColor="#6B4C3B"
+                   Margin="2,0,0,0" />
+
+            <Grid ColumnDefinitions="*,*"
+                  RowDefinitions="Auto,Auto,Auto"
+                  ColumnSpacing="12"
+                  RowSpacing="12">
+                <controls:TagCardView Grid.Row="0"
+                                      Grid.Column="0"
+                                      Text="Fast Food Restaurant"
+                                      TagValue="Fast Food Restaurant"
+                                      Clicked="OnTagClicked" />
+
+                <controls:TagCardView Grid.Row="0"
+                                      Grid.Column="1"
+                                      Text="Chinese Restaurant"
+                                      TagValue="Chinese Restaurant"
+                                      Clicked="OnTagClicked" />
+
+                <controls:TagCardView Grid.Row="1"
+                                      Grid.Column="0"
+                                      Text="Indian Restaurant"
+                                      TagValue="Indian Restaurant"
+                                      Clicked="OnTagClicked" />
+
+                <controls:TagCardView Grid.Row="1"
+                                      Grid.Column="1"
+                                      Text="Sushi Restaurant"
+                                      TagValue="Sushi Restaurant"
+                                      Clicked="OnTagClicked" />
+
+                <controls:TagCardView Grid.Row="2"
+                                      Grid.Column="0"
+                                      Text="Seafood Restaurant"
+                                      TagValue="Seafood Restaurant"
+                                      Clicked="OnTagClicked" />
+
+                <controls:TagCardView Grid.Row="2"
+                                      Grid.Column="1"
+                                      Text="Coffee Shop"
+                                      TagValue="Coffee Shop"
+                                      Clicked="OnTagClicked" />
+            </Grid>
+
+            <Button Text="Search Restaurant"
+                    Clicked="OnSearchClicked"
+                    HorizontalOptions="Fill"
+                    HeightRequest="58"
+                    FontSize="22"
+                    FontAttributes="Bold"
+                    TextColor="White"
+                    BackgroundColor="#E6872F"
+                    BorderColor="#C86E1B"
+                    BorderWidth="1"
+                    CornerRadius="14"
+                    Margin="0,6,0,0" />
+
+            <Border Stroke="#CBA98B"
+                    StrokeThickness="1"
+                    StrokeShape="RoundRectangle 12"
+                    BackgroundColor="#FFF8ED"
+                    Padding="12,10">
+                <Label x:Name="ResultLabel"
+                       Text="Please select a tag and search."
+                       HorizontalOptions="Center"
+                       HorizontalTextAlignment="Center"
+                       FontSize="16"
+                       TextColor="#4A3B31" />
+            </Border>
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

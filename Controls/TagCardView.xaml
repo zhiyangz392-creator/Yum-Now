@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Yum_Now.Controls.TagCardView"
+             x:Name="Root">
+
+    <VisualStateManager.VisualStateGroups>
+        <VisualStateGroupList>
+            <VisualStateGroup x:Name="SelectionStates">
+                <VisualState x:Name="Normal">
+                    <VisualState.Setters>
+                        <Setter TargetName="CardBorder" Property="Border.BackgroundColor" Value="#FFF7EA" />
+                        <Setter TargetName="CardBorder" Property="Border.Stroke" Value="#BA9B80" />
+                        <Setter TargetName="TapButton" Property="Button.TextColor" Value="#1F1F1F" />
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="Selected">
+                    <VisualState.Setters>
+                        <Setter TargetName="CardBorder" Property="Border.BackgroundColor" Value="#FAD8AF" />
+                        <Setter TargetName="CardBorder" Property="Border.Stroke" Value="#C66D1A" />
+                        <Setter TargetName="TapButton" Property="Button.TextColor" Value="#5C2D08" />
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateGroupList>
+    </VisualStateManager.VisualStateGroups>
+
+    <Border x:Name="CardBorder"
+            Stroke="#BA9B80"
+            StrokeThickness="1"
+            StrokeShape="RoundRectangle 14"
+            BackgroundColor="#FFF7EA"
+            Padding="0">
+        <Button x:Name="TapButton"
+                Text="{Binding Text, Source={x:Reference Root}}"
+                Clicked="OnButtonClicked"
+                BackgroundColor="Transparent"
+                BorderWidth="0"
+                CornerRadius="14"
+                HeightRequest="64"
+                FontSize="16"
+                TextColor="#1F1F1F"
+                Padding="10,6" />
+    </Border>
+
+</ContentView>

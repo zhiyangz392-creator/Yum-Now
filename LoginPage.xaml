@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Yum_Now.LoginPage"
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="#FFEFD5">
+
+    <Grid Padding="30" RowDefinitions="Auto,*">
+        <Button Grid.Row="0"
+                Text="Back"
+                Clicked="OnBackClicked"
+                HorizontalOptions="Start"
+                BackgroundColor="#FFF7EA"
+                TextColor="#6B3E26"
+                BorderColor="#BA9B80"
+                BorderWidth="1"
+                CornerRadius="10"
+                Padding="12,6" />
+
+        <VerticalStackLayout Grid.Row="1" VerticalOptions="Center" Spacing="16">
+            <Label Text="Welcome Back"
+                   FontSize="30"
+                   FontAttributes="Bold"
+                   TextColor="#6B3E26" />
+
+            <Label Text="Please log in to your account"
+                   FontSize="15"
+                   TextColor="#8C5A3C" />
+
+            <Entry x:Name="EmailEntry"
+                   Placeholder="Email"
+                   Keyboard="Email"
+                   BackgroundColor="White"
+                   TextColor="#3A2A20"
+                   PlaceholderColor="#B08A73" />
+
+            <Entry x:Name="PasswordEntry"
+                   Placeholder="Password"
+                   IsPassword="True"
+                   BackgroundColor="White"
+                   TextColor="#3A2A20"
+                   PlaceholderColor="#B08A73" />
+
+            <Button Text="Log In"
+                    Clicked="OnLoginClicked"
+                    HeightRequest="48"
+                    CornerRadius="10"
+                    BackgroundColor="#E67E22"
+                    TextColor="White"
+                    FontAttributes="Bold" />
+        </VerticalStackLayout>
+    </Grid>
+
+</ContentPage>

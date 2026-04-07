@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Yum_Now.SplashPage"
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="#F6BF7A">
+
+    <Grid Padding="24">
+        <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center" Spacing="20">
+            <Image x:Name="LogoImage"
+                   Source="yumnow_loading.png"
+                   WidthRequest="320"
+                   Aspect="AspectFit"
+                   Opacity="0" />
+
+            <HorizontalStackLayout x:Name="DotsRow"
+                                   HorizontalOptions="Center"
+                                   Spacing="14"
+                                   Opacity="0">
+                <Border x:Name="Dot1" WidthRequest="14" HeightRequest="14" BackgroundColor="#F89D2E" StrokeThickness="0" StrokeShape="RoundRectangle 7" />
+                <Border x:Name="Dot2" WidthRequest="14" HeightRequest="14" BackgroundColor="#F89D2E" StrokeThickness="0" StrokeShape="RoundRectangle 7" />
+                <Border x:Name="Dot3" WidthRequest="14" HeightRequest="14" BackgroundColor="#F89D2E" StrokeThickness="0" StrokeShape="RoundRectangle 7" />
+            </HorizontalStackLayout>
+        </VerticalStackLayout>
+    </Grid>
+
+</ContentPage>
