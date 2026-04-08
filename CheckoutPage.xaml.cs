@@ -200,10 +200,22 @@ public partial class CheckoutPage : ContentPage
             : Uri.UnescapeDataString(value);
     }
 
-    private sealed record BillLine(string Name, int Qty, decimal UnitPrice)
+    private sealed class BillLine
     {
+        public BillLine(string name, int qty, decimal unitPrice)
+        {
+            Name = name;
+            Qty = qty;
+            UnitPrice = unitPrice;
+        }
+
+        public string Name { get; }
+        public int Qty { get; }
+        public decimal UnitPrice { get; }
+
         public string QtyText => $"x{Qty}";
         public decimal LineTotal => Qty * UnitPrice;
         public string LineTotalText => $"SGD {LineTotal:0.00}";
     }
 }
+

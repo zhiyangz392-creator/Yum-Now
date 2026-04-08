@@ -274,7 +274,17 @@ internal static class RestaurantCatalog
         return menu;
     }
 
-    internal sealed record MenuSeed(string Name, decimal Price);
+    internal sealed class MenuSeed
+    {
+        public MenuSeed(string name, decimal price)
+        {
+            Name = name;
+            Price = price;
+        }
+
+        public string Name { get; }
+        public decimal Price { get; }
+    }
 
     private sealed class RestaurantMenuProfile
     {
@@ -290,3 +300,4 @@ internal static class RestaurantCatalog
         public List<MenuSeed> Items { get; }
     }
 }
+

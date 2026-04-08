@@ -129,10 +129,21 @@ internal static class LocalStorageService
         }
 
         var key = BuildRestaurantDraftKey(restaurant);
-        var rows = quantities
-            .Where(x => x.Value > 0 && !string.IsNullOrWhiteSpace(x.Key))
-            .Select(x => new MenuDraftRow(x.Key, x.Value))
-            .ToList();
+        var rows = new List<MenuDraftItem>();
+
+        foreach (var pair in quantities)
+        {
+            if (pair.Value <= 0 || string.IsNullOrWhiteSpace(pair.Key))
+            {
+                continue;
+            }
+
+            rows.Add(new MenuDraftItem
+            {
+                Name = pair.Key.Trim(),
+                Quantity = pair.Value
+            });
+        }
 
         if (rows.Count == 0)
         {
@@ -146,9 +157,11 @@ internal static class LocalStorageService
 
     public static Dictionary<string, int> LoadMenuDraft(string restaurant)
     {
+        var result = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase);
+
         if (string.IsNullOrWhiteSpace(restaurant))
         {
-            return new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase);
+            return result;
         }
 
         var key = BuildRestaurantDraftKey(restaurant);
@@ -156,21 +169,33 @@ internal static class LocalStorageService
 
         if (string.IsNullOrWhiteSpace(json))
         {
-            return new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase);
+            return result;
         }
 
         try
         {
-            var rows = JsonSerializer.Deserialize<List<MenuDraftRow>>(json) ?? new List<MenuDraftRow>();
-            return rows
-                .Where(x => !string.IsNullOrWhiteSpace(x.Name) && x.Quantity > 0)
-                .GroupBy(x => x.Name, StringComparer.OrdinalIgnoreCase)
-                .ToDictionary(g => g.Key, g => g.Last().Quantity, StringComparer.OrdinalIgnoreCase);
+            var rows = JsonSerializer.Deserialize<List<MenuDraftItem>>(json);
+            if (rows == null)
+            {
+                return result;
+            }
+
+            foreach (var row in rows)
+            {
+                if (row == null || string.IsNullOrWhiteSpace(row.Name) || row.Quantity <= 0)
+                {
+                    continue;
+                }
+
+                result[row.Name] = row.Quantity;
+            }
         }
         catch
         {
-            return new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase);
+            // Keep empty dictionary on broken json.
         }
+
+        return result;
     }
 
     public static void SaveCheckoutDraft(string restaurant, string items, decimal subtotal)
@@ -180,10 +205,12 @@ internal static class LocalStorageService
             return;
         }
 
-        var draft = new CheckoutDraft(
-            restaurant.Trim(),
-            items.Trim(),
-            subtotal.ToString("0.00", CultureInfo.InvariantCulture));
+        var draft = new CheckoutDraftModel
+        {
+            Restaurant = restaurant.Trim(),
+            Items = items.Trim(),
+            Subtotal = subtotal.ToString("0.00", CultureInfo.InvariantCulture)
+        };
 
         var json = JsonSerializer.Serialize(draft);
         Preferences.Default.Set(CheckoutDraftKey, json);
@@ -199,13 +226,14 @@ internal static class LocalStorageService
 
         try
         {
-            var draft = JsonSerializer.Deserialize<CheckoutDraft>(json);
+            var draft = JsonSerializer.Deserialize<CheckoutDraftModel>(json);
             if (draft == null || string.IsNullOrWhiteSpace(draft.Items))
             {
                 return null;
             }
 
-            if (!decimal.TryParse(draft.Subtotal, NumberStyles.Number, CultureInfo.InvariantCulture, out var subtotal))
+            var subtotal = 0m;
+            if (!decimal.TryParse(draft.Subtotal, NumberStyles.Number, CultureInfo.InvariantCulture, out subtotal))
             {
                 subtotal = 0m;
             }
@@ -247,7 +275,16 @@ internal static class LocalStorageService
         return RestaurantDraftPrefix + sb;
     }
 
-    private sealed record MenuDraftRow(string Name, int Quantity);
+    private sealed class MenuDraftItem
+    {
+        public string Name { get; set; } = string.Empty;
+        public int Quantity { get; set; }
+    }
 
-    private sealed record CheckoutDraft(string Restaurant, string Items, string Subtotal);
+    private sealed class CheckoutDraftModel
+    {
+        public string Restaurant { get; set; } = string.Empty;
+        public string Items { get; set; } = string.Empty;
+        public string Subtotal { get; set; } = string.Empty;
+    }
 }

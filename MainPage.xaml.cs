@@ -2,12 +2,28 @@
 
 public partial class MainPage : ContentPage
 {
+    private const string TagNormalBackground = "#FFF7EA";
+    private const string TagNormalText = "#1F1F1F";
+    private const string TagNormalBorder = "#BA9B80";
+    private const string TagSelectedBackground = "#FAD8AF";
+    private const string TagSelectedText = "#5C2D08";
+    private const string TagSelectedBorder = "#C66D1A";
+
     private string _selectedTag = string.Empty;
-    private Controls.TagCardView? _selectedCard;
+    private readonly List<Button> _tagButtons;
 
     public MainPage()
     {
         InitializeComponent();
+        _tagButtons = new List<Button>
+        {
+            FastFoodButton,
+            ChineseButton,
+            IndianButton,
+            SushiButton,
+            SeafoodButton,
+            CoffeeButton
+        };
     }
 
     private async void OnBackClicked(object? sender, EventArgs e)
@@ -44,22 +60,20 @@ public partial class MainPage : ContentPage
         await Shell.Current.GoToAsync("//LoginPage");
     }
 
-    private void OnTagClicked(object? sender, EventArgs e)
+    private void OnTagButtonClicked(object? sender, EventArgs e)
     {
-        if (sender is not Controls.TagCardView card)
+        if (sender is not Button button)
         {
             return;
         }
 
-        if (_selectedCard != null && !ReferenceEquals(_selectedCard, card))
+        foreach (var tagButton in _tagButtons)
         {
-            _selectedCard.IsSelected = false;
+            SetButtonNormalStyle(tagButton);
         }
 
-        card.IsSelected = true;
-        _selectedCard = card;
-
-        _selectedTag = card.TagValue?.Trim() ?? card.Text?.Trim() ?? string.Empty;
+        SetButtonSelectedStyle(button);
+        _selectedTag = button.CommandParameter?.ToString()?.Trim() ?? button.Text?.Trim() ?? string.Empty;
         ResultLabel.Text = $"Selected tag: {_selectedTag}";
     }
 
@@ -78,5 +92,19 @@ public partial class MainPage : ContentPage
 
         var route = $"{nameof(SearchPage)}?tag={Uri.EscapeDataString(_selectedTag)}";
         await Shell.Current.GoToAsync(route);
+    }
+
+    private static void SetButtonNormalStyle(Button button)
+    {
+        button.BackgroundColor = Color.FromArgb(TagNormalBackground);
+        button.TextColor = Color.FromArgb(TagNormalText);
+        button.BorderColor = Color.FromArgb(TagNormalBorder);
+    }
+
+    private static void SetButtonSelectedStyle(Button button)
+    {
+        button.BackgroundColor = Color.FromArgb(TagSelectedBackground);
+        button.TextColor = Color.FromArgb(TagSelectedText);
+        button.BorderColor = Color.FromArgb(TagSelectedBorder);
     }
 }

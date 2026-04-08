@@ -72,15 +72,17 @@ public partial class PaymentPage : ContentPage
         }
 
         LocalStorageService.SavePreferredPaymentMethod(method);
+        var addressToSave = string.IsNullOrWhiteSpace(_address) ? AddressLabel.Text ?? string.Empty : _address;
+        LocalStorageService.SaveDeliveryAddress(addressToSave);
 
-        StatusLabel.Text = $"Payment success. Method: {method}";
+        StatusLabel.Text = $"Payment success. Method: {method}. Opening GPS map page...";
         StatusLabel.IsVisible = true;
 
         await DisplayAlertAsync("Payment Success", $"Paid SGD {_amount:0.00} via {method}.", "OK");
 
         if (Shell.Current != null)
         {
-            await Shell.Current.GoToAsync("//MainPage");
+            await Shell.Current.GoToAsync(nameof(DeliveryLocationPage));
         }
     }
 

@@ -39,68 +39,7 @@
                     CornerRadius="14"
                     FontAttributes="Bold" />
 
-            <Grid x:Name="StateHost">
-                <VisualStateManager.VisualStateGroups>
-                    <VisualStateGroupList>
-                        <VisualStateGroup x:Name="SearchStates">
-                            <VisualState x:Name="Idle">
-                                <VisualState.Setters>
-                                    <Setter TargetName="IdleView" Property="IsVisible" Value="True" />
-                                    <Setter TargetName="LoadingView" Property="IsVisible" Value="False" />
-                                    <Setter TargetName="ResultsView" Property="IsVisible" Value="False" />
-                                    <Setter TargetName="EmptyView" Property="IsVisible" Value="False" />
-                                    <Setter TargetName="ErrorView" Property="IsVisible" Value="False" />
-                                    <Setter TargetName="SearchButton" Property="IsEnabled" Value="True" />
-                                </VisualState.Setters>
-                            </VisualState>
-
-                            <VisualState x:Name="Loading">
-                                <VisualState.Setters>
-                                    <Setter TargetName="IdleView" Property="IsVisible" Value="False" />
-                                    <Setter TargetName="LoadingView" Property="IsVisible" Value="True" />
-                                    <Setter TargetName="ResultsView" Property="IsVisible" Value="False" />
-                                    <Setter TargetName="EmptyView" Property="IsVisible" Value="False" />
-                                    <Setter TargetName="ErrorView" Property="IsVisible" Value="False" />
-                                    <Setter TargetName="SearchButton" Property="IsEnabled" Value="False" />
-                                </VisualState.Setters>
-                            </VisualState>
-
-                            <VisualState x:Name="Results">
-                                <VisualState.Setters>
-                                    <Setter TargetName="IdleView" Property="IsVisible" Value="False" />
-                                    <Setter TargetName="LoadingView" Property="IsVisible" Value="False" />
-                                    <Setter TargetName="ResultsView" Property="IsVisible" Value="True" />
-                                    <Setter TargetName="EmptyView" Property="IsVisible" Value="False" />
-                                    <Setter TargetName="ErrorView" Property="IsVisible" Value="False" />
-                                    <Setter TargetName="SearchButton" Property="IsEnabled" Value="True" />
-                                </VisualState.Setters>
-                            </VisualState>
-
-                            <VisualState x:Name="Empty">
-                                <VisualState.Setters>
-                                    <Setter TargetName="IdleView" Property="IsVisible" Value="False" />
-                                    <Setter TargetName="LoadingView" Property="IsVisible" Value="False" />
-                                    <Setter TargetName="ResultsView" Property="IsVisible" Value="False" />
-                                    <Setter TargetName="EmptyView" Property="IsVisible" Value="True" />
-                                    <Setter TargetName="ErrorView" Property="IsVisible" Value="False" />
-                                    <Setter TargetName="SearchButton" Property="IsEnabled" Value="True" />
-                                </VisualState.Setters>
-                            </VisualState>
-
-                            <VisualState x:Name="Error">
-                                <VisualState.Setters>
-                                    <Setter TargetName="IdleView" Property="IsVisible" Value="False" />
-                                    <Setter TargetName="LoadingView" Property="IsVisible" Value="False" />
-                                    <Setter TargetName="ResultsView" Property="IsVisible" Value="False" />
-                                    <Setter TargetName="EmptyView" Property="IsVisible" Value="False" />
-                                    <Setter TargetName="ErrorView" Property="IsVisible" Value="True" />
-                                    <Setter TargetName="SearchButton" Property="IsEnabled" Value="True" />
-                                </VisualState.Setters>
-                            </VisualState>
-                        </VisualStateGroup>
-                    </VisualStateGroupList>
-                </VisualStateManager.VisualStateGroups>
-
+            <Grid>
                 <VerticalStackLayout x:Name="IdleView" Spacing="6">
                     <Label x:Name="IdleMessageLabel"
                            Text="Type a tag and tap Search on Internet."

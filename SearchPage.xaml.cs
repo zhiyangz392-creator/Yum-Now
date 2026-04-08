@@ -149,8 +149,12 @@ public partial class SearchPage : ContentPage
 
     private void SetState(SearchState state, string? message = null)
     {
-        var stateName = state.ToString();
-        VisualStateManager.GoToState(StateHost, stateName);
+        IdleView.IsVisible = state == SearchState.Idle;
+        LoadingView.IsVisible = state == SearchState.Loading;
+        ResultsView.IsVisible = state == SearchState.Results;
+        EmptyView.IsVisible = state == SearchState.Empty;
+        ErrorView.IsVisible = state == SearchState.Error;
+        SearchButton.IsEnabled = state != SearchState.Loading;
 
         if (message == null)
         {
@@ -293,14 +297,25 @@ public partial class SearchPage : ContentPage
         Error
     }
 
-    private sealed record RestaurantPlace(string Name, string PlaceType);
+    private sealed class RestaurantPlace
+    {
+        public RestaurantPlace(string name, string placeType)
+        {
+            Name = name;
+            PlaceType = placeType;
+        }
+
+        public string Name { get; }
+        public string PlaceType { get; }
+    }
 
     private sealed class SearchResultItem
     {
-        public string RestaurantName { get; init; } = string.Empty;
-        public string Tag { get; init; } = string.Empty;
-        public string PlaceType { get; init; } = string.Empty;
-        public string MenuItemsRaw { get; init; } = string.Empty;
-        public string MenuSummary { get; init; } = string.Empty;
+        public string RestaurantName { get; set; } = string.Empty;
+        public string Tag { get; set; } = string.Empty;
+        public string PlaceType { get; set; } = string.Empty;
+        public string MenuItemsRaw { get; set; } = string.Empty;
+        public string MenuSummary { get; set; } = string.Empty;
     }
 }
+

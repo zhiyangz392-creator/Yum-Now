@@ -1,14 +1,11 @@
-﻿#if ANDROID
-using Android.App;
-using Android.Content.PM;
-using AndroidApplication = Android.App.Application;
-#endif
-
-namespace Yum_Now;
+﻿namespace Yum_Now;
 
 internal static class GoogleMapsKeyProvider
 {
-    public static string? Resolve()
+    // For class demo use; replace with your own key when needed.
+    private const string DemoKey = "AIzaSyA7J02RZqiSVOP5UNAOa3k2n76lP2PlE0Y";
+
+    public static string Resolve()
     {
         var envKey = Environment.GetEnvironmentVariable("GOOGLE_MAPS_API_KEY");
         if (!string.IsNullOrWhiteSpace(envKey))
@@ -16,37 +13,6 @@ internal static class GoogleMapsKeyProvider
             return envKey.Trim();
         }
 
-#if ANDROID
-        return ResolveFromAndroidManifest();
-#else
-        return null;
-#endif
+        return DemoKey;
     }
-
-#if ANDROID
-    private static string? ResolveFromAndroidManifest()
-    {
-        try
-        {
-            var context = AndroidApplication.Context;
-            var packageName = context.PackageName;
-            if (string.IsNullOrWhiteSpace(packageName))
-            {
-                return null;
-            }
-
-            var appInfo = context.PackageManager?.GetApplicationInfo(packageName, PackageInfoFlags.MetaData);
-            var metadata = appInfo?.MetaData;
-
-            var key = metadata?.GetString("GOOGLE_MAPS_API_KEY")
-                      ?? metadata?.GetString("com.google.android.geo.API_KEY");
-
-            return string.IsNullOrWhiteSpace(key) ? null : key.Trim();
-        }
-        catch
-        {
-            return null;
-        }
-    }
-#endif
 }

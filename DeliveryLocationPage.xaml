@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Yum_Now.DeliveryLocationPage"
+             Shell.NavBarIsVisible="False"
+             Title="Delivery GPS"
+             BackgroundColor="#FFEFD5">
+
+    <VerticalStackLayout Padding="18,20" Spacing="12">
+        <Button Text="Back"
+                Clicked="OnBackClicked"
+                HorizontalOptions="Start"
+                BackgroundColor="#FFF7EA"
+                TextColor="#6B3E26"
+                BorderColor="#BA9B80"
+                BorderWidth="1"
+                CornerRadius="10"
+                Padding="12,6" />
+
+        <Label Text="Delivery GPS Map"
+               FontSize="26"
+               FontAttributes="Bold"
+               HorizontalOptions="Center"
+               TextColor="#2E2E2E" />
+
+        <Label x:Name="CoordinateLabel"
+               Text="Lat: -   Lng: -"
+               FontSize="14"
+               HorizontalOptions="Center"
+               TextColor="#5D4A3F" />
+
+        <Grid ColumnDefinitions="*,*" ColumnSpacing="10">
+            <Button Grid.Column="0"
+                    Text="Refresh GPS"
+                    Clicked="OnRefreshClicked"
+                    HeightRequest="44"
+                    CornerRadius="10"
+                    BackgroundColor="#E6872F"
+                    TextColor="White"
+                    FontAttributes="Bold" />
+
+            <Button Grid.Column="1"
+                    Text="Open Maps"
+                    Clicked="OnOpenMapClicked"
+                    HeightRequest="44"
+                    CornerRadius="10"
+                    BackgroundColor="#FFD7A8"
+                    TextColor="#5C2D08"
+                    BorderColor="#C97E35"
+                    BorderWidth="1" />
+        </Grid>
+
+        <Border Stroke="#CFAF94"
+                StrokeThickness="1"
+                StrokeShape="RoundRectangle 12"
+                BackgroundColor="#FFF8ED"
+                Padding="8">
+            <WebView x:Name="MapView" HeightRequest="420" />
+        </Border>
+
+        <Label x:Name="StatusLabel"
+               FontSize="13"
+               TextColor="#6A4A39"
+               HorizontalOptions="Center" />
+    </VerticalStackLayout>
+
+</ContentPage>
