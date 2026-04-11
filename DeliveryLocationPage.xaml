@@ -62,6 +62,15 @@
                FontSize="13"
                TextColor="#6A4A39"
                HorizontalOptions="Center" />
+
+        <Button Text="Confirm Delivery"
+                Clicked="OnConfirmReceivedClicked"
+                HeightRequest="48"
+                Margin="0,6,0,0"
+                CornerRadius="12"
+                FontAttributes="Bold"
+                BackgroundColor="#E6872F"
+                TextColor="White" />
     </VerticalStackLayout>
 
 </ContentPage>

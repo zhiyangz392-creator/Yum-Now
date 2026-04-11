@@ -57,6 +57,16 @@ public partial class DeliveryLocationPage : ContentPage
         await Launcher.Default.OpenAsync(url);
     }
 
+    private async void OnConfirmReceivedClicked(object? sender, EventArgs e)
+    {
+        await DisplayAlertAsync("Order", "Delivery confirmed. Enjoy your meal!", "OK");
+
+        if (Shell.Current != null)
+        {
+            await Shell.Current.GoToAsync("//MainPage");
+        }
+    }
+
     private async Task UpdateCurrentLocationAsync()
     {
         try
