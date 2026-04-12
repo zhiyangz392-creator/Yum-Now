@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Yum_Now.DeliverySuccessPage"
+             Shell.NavBarIsVisible="False"
+             Title="Delivery Success"
+             BackgroundColor="#FFEFD5">
+
+    <VerticalStackLayout Padding="20,24" Spacing="16">
+        <Label Text="Delivery Received Successfully"
+               FontSize="28"
+               FontAttributes="Bold"
+               HorizontalTextAlignment="Center"
+               TextColor="#2E2E2E" />
+
+        <Label Text="Thank you! Please leave your rating."
+               FontSize="15"
+               HorizontalTextAlignment="Center"
+               TextColor="#6A4A39" />
+
+        <Border Stroke="#CFAF94"
+                StrokeThickness="1"
+                StrokeShape="RoundRectangle 12"
+                BackgroundColor="#FFF8ED"
+                Padding="14">
+            <VerticalStackLayout Spacing="12">
+                <Label Text="Star Rating"
+                       FontAttributes="Bold"
+                       FontSize="16"
+                       TextColor="#4A3B31" />
+
+                <HorizontalStackLayout HorizontalOptions="Center" Spacing="8">
+                    <Button x:Name="StarButton1"
+                            Text="☆"
+                            FontSize="28"
+                            Clicked="OnStarClicked"
+                            CommandParameter="1"
+                            BackgroundColor="Transparent"
+                            TextColor="#E08A2F" />
+                    <Button x:Name="StarButton2"
+                            Text="☆"
+                            FontSize="28"
+                            Clicked="OnStarClicked"
+                            CommandParameter="2"
+                            BackgroundColor="Transparent"
+                            TextColor="#E08A2F" />
+                    <Button x:Name="StarButton3"
+                            Text="☆"
+                            FontSize="28"
+                            Clicked="OnStarClicked"
+                            CommandParameter="3"
+                            BackgroundColor="Transparent"
+                            TextColor="#E08A2F" />
+                    <Button x:Name="StarButton4"
+                            Text="☆"
+                            FontSize="28"
+                            Clicked="OnStarClicked"
+                            CommandParameter="4"
+                            BackgroundColor="Transparent"
+                            TextColor="#E08A2F" />
+                    <Button x:Name="StarButton5"
+                            Text="☆"
+                            FontSize="28"
+                            Clicked="OnStarClicked"
+                            CommandParameter="5"
+                            BackgroundColor="Transparent"
+                            TextColor="#E08A2F" />
+                </HorizontalStackLayout>
+
+                <Label x:Name="RatingLabel"
+                       Text="No rating selected."
+                       FontSize="14"
+                       TextColor="#6A4A39"
+                       HorizontalTextAlignment="Center" />
+
+                <Label Text="Text Review"
+                       FontAttributes="Bold"
+                       FontSize="16"
+                       TextColor="#4A3B31" />
+
+                <Editor x:Name="ReviewEditor"
+                        Placeholder="Write your review here..."
+                        AutoSize="TextChanges"
+                        HeightRequest="140"
+                        BackgroundColor="White"
+                        TextColor="#222222" />
+            </VerticalStackLayout>
+        </Border>
+
+        <Grid ColumnDefinitions="*,*" ColumnSpacing="10" Margin="0,6,0,0">
+            <Button Grid.Column="0"
+                    Text="Back To Restaurant"
+                    Clicked="OnBackToRestaurantClicked"
+                    HeightRequest="46"
+                    CornerRadius="12"
+                    BackgroundColor="#FFD7A8"
+                    TextColor="#5C2D08"
+                    BorderColor="#C97E35"
+                    BorderWidth="1"
+                    FontAttributes="Bold" />
+
+            <Button Grid.Column="1"
+                    Text="Back To Home"
+                    Clicked="OnBackToHomeClicked"
+                    HeightRequest="46"
+                    CornerRadius="12"
+                    BackgroundColor="#E6872F"
+                    TextColor="White"
+                    FontAttributes="Bold" />
+        </Grid>
+    </VerticalStackLayout>
+
+</ContentPage>

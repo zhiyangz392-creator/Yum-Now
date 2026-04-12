@@ -63,7 +63,7 @@ public partial class DeliveryLocationPage : ContentPage
 
         if (Shell.Current != null)
         {
-            await Shell.Current.GoToAsync("//MainPage");
+            await Shell.Current.GoToAsync(nameof(DeliverySuccessPage));
         }
     }
 
