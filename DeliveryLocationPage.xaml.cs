@@ -59,6 +59,12 @@ public partial class DeliveryLocationPage : ContentPage
 
     private async void OnConfirmReceivedClicked(object? sender, EventArgs e)
     {
+        var sent = await NotificationService.TrySendDeliveryReceivedNotificationAsync();
+        if (!sent)
+        {
+            StatusLabel.Text = "Delivery confirmed. Notification permission not granted.";
+        }
+
         await DisplayAlertAsync("Order", "Delivery confirmed. Enjoy your meal!", "OK");
 
         if (Shell.Current != null)
